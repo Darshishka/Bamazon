@@ -77,7 +77,7 @@ function productList(listProducts) {
                     {
                         type: "number",
                         name: "product",
-                        message: "What product would you like to addd more quantity to?"
+                        message: "What product would you like to add more quantity to?"
                     },
                     {
                         type: "number",
@@ -86,13 +86,16 @@ function productList(listProducts) {
                     }
                 ]).then(function(answers) {
                     console.log("product id: " + answers.product);
-                    console.log("product ammout: " + answers.ammount);
+                    console.log("ammount added: " + answers.ammount);
+                    end();
                 });
             }
             function addProduct() {
 
             }
-            process.exit();
+            function end(){
+                process.exit();
+            }
         });
     });
 };
