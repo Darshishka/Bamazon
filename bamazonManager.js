@@ -72,7 +72,6 @@ function productList(listProducts) {
                 }
             }
             function addInv() {
-                console.log("some string");
                 inquirer.prompt([
                     {
                         type: "number",
@@ -85,13 +84,46 @@ function productList(listProducts) {
                         message: "How many would you like to add?"
                     }
                 ]).then(function(answers) {
-                    console.log("product id: " + answers.product);
-                    console.log("ammount added: " + answers.ammount);
-                    end();
+                    var productToAddID = answers.product;
+                    var ammountToAdd = answers.ammount;
+                    var oldQuantity;
+                    connection.query("select * from Products WHERE item_id = " + productToAddID + "", function(err, res) {
+                        if (err) throw err;
+                        oldQuantity = res[0].stock_quantity;
+                        console.log("product id: " + productToAddID);
+                        console.log("ammount added " + ammountToAdd);
+                        console.log("old quantity " + oldQuantity);
+                        var newQuantity = oldQuantity + ammountToAdd;
+                        console.log("new quantity " + newQuantity);
+//need help updating quantity
+                        var addQuery = "UPDATE Products SET stock_quantity=" + newQuantity + " WHERE item_id=" + productToAddID + "";
+                        connection.query(addQuery, function(err, res) {
+                            if (err) throw err;
+                        });
+                        end();
+                    });
                 });
             }
             function addProduct() {
-
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "newProduct",
+                        message: "What is the name of the product you would like to add?"
+                    },
+                    {
+                        type: "input",
+                        name: "newProductPrice",
+                        message: "What is the price of this new product?"
+                    },
+                    {
+                        type: "number",
+                        name: "newProductQuantity",
+                        message: "How many units of this product do you want to add?"
+                    }
+                ]).then(function(newProduct) {
+                    
+                });
             }
             function end(){
                 process.exit();
