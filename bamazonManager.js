@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "221bBakerStreet!",
+    password: "",
     database: "bamazon"
 });
 
@@ -57,6 +57,7 @@ function productList(listProducts) {
                     Item Quantity: ${item.stock_quantity}`)
                     console.log("--------------------------------------")
                 }
+                end();
             }
             function viewLowInv() {
                 for (var i = 0; i < res.length; i++) {
@@ -95,14 +96,15 @@ function productList(listProducts) {
                         console.log("old quantity " + oldQuantity);
                         var newQuantity = oldQuantity + ammountToAdd;
                         console.log("new quantity " + newQuantity);
-//need help updating quantity
-                        var addQuery = "UPDATE Products SET stock_quantity=" + newQuantity + " WHERE item_id=" + productToAddID + "";
+
+                        var addQuery = `UPDATE Products SET stock_quantity = ${newQuantity} WHERE item_id = ${answers.product}`;
                         connection.query(addQuery, function(err, res) {
                             if (err) throw err;
+                            end();
+                            });
                         });
-                        end();
                     });
-                });
+                
             }
             function addProduct() {
                 inquirer.prompt([
@@ -114,15 +116,21 @@ function productList(listProducts) {
                     {
                         type: "input",
                         name: "newProductPrice",
-                        message: "What is the price of this new product?"
+                        message: "What is the price of this new product? $"
                     },
                     {
                         type: "number",
                         name: "newProductQuantity",
-                        message: "How many units of this product do you want to add?"
+                        message: "How many units of this product do you have?"
+                    },
+                    {
+                        type: "input",
+                        name: "newProductDepartment",
+                        message: "What department is this product located in?"
                     }
                 ]).then(function(newProduct) {
-                    
+                    console.log(newProduct);
+                    end();
                 });
             }
             function end(){
