@@ -7,11 +7,19 @@ After downloading both js files be sure to enter `npm install mysql` into the co
 ## Troubble Shooting
 If, upon running the file, you come across an error stating that your access is dennied then you may need to fill in your MySQL password located on line 8 withing the Javascript file.
 
+![Image of Password Location](password-location.png)
+
 ## Bamazon Customer
 The bamazonCostomer.js simulates what it's like to purchase from an online store. Through the console/terminal a user will be able to "purchase" an item or several of the selected item.
 
+![Image of Customer View](customer-view1.png)
+
+![Image of Customer View](customer-view2.png)
+
 ## Bamazon Manager
 The bamazonManager.js simulates a store owners side of a store. Through the concole/terminal a user can view items being sold, sort thoes items by low invintory, add more stock to exsiting items and add an enterly new product to the store.
+
+![Image of Manager View](manager-view.png)
 
 ## Languages/Programs
 * Javascript
